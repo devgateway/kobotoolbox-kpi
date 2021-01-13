@@ -113,15 +113,6 @@ class ServiceDefinitionInterface(metaclass=ABCMeta):
 
                 SSRFProtect.validate(self._hook.endpoint,
                                      options=ssrf_protect_options)
-                """
-                # For local Kobo instance to work:
-                # If we'll need to use an older version that doesn't allow to configure SSRF_ALLOWED_IP_ADDRESS,
-                # then we can turn SSRFProtect off through a flag configured in kobo-docker & kobo-install.
-                if os.getenv("SSRF_ON", "True") == "True":
-                    SSRFProtect.validate(self._hook.endpoint, options=ssrf_protect_options)
-                else:
-                    logging.info("Skipping SSRFProtect with SSRF_ON=False")
-                """
 
                 response = requests.post(self._hook.endpoint, timeout=30, **request_kwargs)
                 response.raise_for_status()
