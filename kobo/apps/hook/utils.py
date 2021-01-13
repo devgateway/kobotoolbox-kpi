@@ -19,8 +19,8 @@ class HookUtils:
         # to make success equal True
         success = False
         for hook_id in hooks_ids:
-            if not HookLog.objects.filter(instance_id=instance_id, hook_id=hook_id).exists():
-                success = True
-                service_definition_task.delay(hook_id, instance_id)
+            # if not HookLog.objects.filter(instance_id=instance_id, hook_id=hook_id).exists():
+            success = True
+            service_definition_task.delay(hook_id, instance_id)
 
         return success
