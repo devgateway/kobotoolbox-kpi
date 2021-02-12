@@ -44,3 +44,14 @@ class UserAccountSerializer(serializers.ModelSerializer):
                 pass
         user.save()
         return user
+
+    def update(self, instance, validated_data):
+        if 'password' in validated_data:
+            pwd = validated_data['password']
+            if pwd is not None:
+                instance.set_password(pwd)
+            try:
+                del validated_data["password"]
+            except AttributeError:
+                pass
+        return super().update(instance, validated_data)
