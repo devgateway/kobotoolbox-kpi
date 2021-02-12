@@ -13,7 +13,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
         max_length=USERNAME_MAX_LENGTH,
         error_messages={'invalid': USERNAME_INVALID_MESSAGE}
     )
-    email = serializers.EmailField()
+    email = serializers.EmailField(default="")
 
     class Meta:
         model = User
@@ -23,10 +23,11 @@ class UserAccountSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'is_active',
         )
         extra_kwargs = {
             'password': {'write_only': True},
-            'email': {'required': True}
+            'email': {'required': False}
         }
 
     def create(self, validated_data):
