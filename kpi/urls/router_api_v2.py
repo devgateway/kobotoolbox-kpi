@@ -16,6 +16,7 @@ from kpi.views.v2.data import DataViewSet
 
 from kpi.views.v2.permission import PermissionViewSet
 from kpi.views.v2.user import UserViewSet
+from kpi.views.v2.user_account import UserAccountViewSet
 
 
 URL_NAMESPACE = 'api_v2'
@@ -76,6 +77,7 @@ collection_routes.register(r'permission-assignments',
                            )
 
 router_api_v2.register(r'users', UserViewSet)
+router_api_v2.register(r'user_account', UserAccountViewSet)
 router_api_v2.register(r'permissions', PermissionViewSet)
 
 # TODO migrate ViewSet below

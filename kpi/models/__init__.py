@@ -11,5 +11,7 @@ from .import_export_task import ImportTask, ExportTask
 from .tag_uid import TagUid
 from .authorized_application import AuthorizedApplication
 from .authorized_application import OneTimeAuthenticationKey
+from .authorized_application import StaffTokenAuthentication
+from .authorized_application import RequiredTokenAuthentication
 
 import kpi.signals

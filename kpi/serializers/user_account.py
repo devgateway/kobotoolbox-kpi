@@ -7,13 +7,13 @@ from kpi.forms import USERNAME_MAX_LENGTH
 from kpi.forms import USERNAME_INVALID_MESSAGE
 
 
-class CreateUserSerializer(serializers.ModelSerializer):
+class UserAccountSerializer(serializers.ModelSerializer):
     username = serializers.RegexField(
         regex=USERNAME_REGEX,
         max_length=USERNAME_MAX_LENGTH,
         error_messages={'invalid': USERNAME_INVALID_MESSAGE}
     )
-    email = serializers.EmailField()
+    email = serializers.EmailField(default="")
 
     class Meta:
         model = User
@@ -23,10 +23,11 @@ class CreateUserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'is_active',
         )
         extra_kwargs = {
             'password': {'write_only': True},
-            'email': {'required': True}
+            'email': {'required': False}
         }
 
     def create(self, validated_data):
@@ -44,3 +45,14 @@ class CreateUserSerializer(serializers.ModelSerializer):
                 pass
         user.save()
         return user
+
+    def update(self, instance, validated_data):
+        if 'password' in validated_data:
+            pwd = validated_data['password']
+            if pwd is not None:
+                instance.set_password(pwd)
+            try:
+                del validated_data["password"]
+            except AttributeError:
+                pass
+        return super().update(instance, validated_data)
