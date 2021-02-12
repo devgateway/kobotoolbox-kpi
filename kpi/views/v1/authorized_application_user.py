@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins, exceptions
 
 from kpi.models import AuthorizedApplication
-from kpi.models.authorized_application import ApplicationTokenAuthentication
+from kpi.models.authorized_application import StaffTokenAuthentication
 from kpi.serializers import CreateUserSerializer
 
 
 class AuthorizedApplicationUserViewSet(mixins.CreateModelMixin,
                                        viewsets.GenericViewSet):
-    authentication_classes = [ApplicationTokenAuthentication]
+    authentication_classes = [StaffTokenAuthentication]
     queryset = User.objects.all()
     serializer_class = CreateUserSerializer
     lookup_field = 'username'
