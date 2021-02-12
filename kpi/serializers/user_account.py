@@ -7,7 +7,7 @@ from kpi.forms import USERNAME_MAX_LENGTH
 from kpi.forms import USERNAME_INVALID_MESSAGE
 
 
-class CreateUserSerializer(serializers.ModelSerializer):
+class UserAccountSerializer(serializers.ModelSerializer):
     username = serializers.RegexField(
         regex=USERNAME_REGEX,
         max_length=USERNAME_MAX_LENGTH,
