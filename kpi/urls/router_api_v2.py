@@ -75,9 +75,10 @@ collection_routes.register(r'permission-assignments',
                            basename='collection-permission-assignment',
                            parents_query_lookups=['collection'],
                            )
-
-router_api_v2.register(r'users', UserViewSet)
+# IMPORTANT: keep "users" details after the new "user_account"
+# Latest user "view" API is automatically picked by Kobo to be used in app (e.g. project Sharing settings)
 router_api_v2.register(r'user_account', UserAccountViewSet)
+router_api_v2.register(r'users', UserViewSet)
 router_api_v2.register(r'permissions', PermissionViewSet)
 
 # TODO migrate ViewSet below

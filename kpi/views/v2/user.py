@@ -12,7 +12,7 @@ class UserViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     This viewset provides only the `detail` action; `list` is *not* provided to
     avoid disclosing every username in the database
     """
-    authentication_classes = [StaffTokenAuthentication]
+    authentication_classes = [ApplicationTokenAuthentication]
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
